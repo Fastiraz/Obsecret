@@ -1,0 +1,10 @@
+{
+	"id": "obsecret",
+	"name": "Obsecret",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "-_-",
+	"author": "Fastiraz",
+	"authorUrl": "https://github.com/Fastiraz",
+	"isDesktopOnly": false
+}

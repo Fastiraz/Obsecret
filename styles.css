@@ -1,42 +1,43 @@
 .secret, .secret-show {
-  transition: all .3s;
-  position: relative;
-  color: transparent;
-  text-shadow: 0 0 12px var(--text-normal);
-  padding: .8em;
-  cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.5); /* code blocks *//*var(--background-secondary);*/
-  border-radius: 4px;
-  user-select: none;
-}
-
-.secret-show {
-  text-shadow: 0 0 0 transparent !important;
-  color: var(--text-normal) !important;
-  user-select: auto !important;
-  cursor: auto !important;
-}
-
-.secret::before, .secret::after {
-  display: block;
-  position: absolute;
-  font-weight: 500;
-  color: var(--text-accent);
-  text-align: center;
-  text-shadow: none;
-  transition: all .3s;
-  content: 'CLICK TO UNLOCK';
-  opacity: 0;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
-  top: 50%;
-}
-
-.secret:hover:before {
-  opacity: 1;
-}
-
-.secret:hover {
-  text-shadow: 0 0 14px var(--text-normal);
-}
+    transition: all .3s;
+    position: relative;
+    color: transparent;
+    text-shadow: 0 0 12px var(--text-normal);
+    padding: .8em;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.5); /* code blocks *//*var(--background-secondary);*/
+    border-radius: 4px;
+    user-select: none;
+  }
+  
+  .secret-show {
+    text-shadow: 0 0 0 transparent !important;
+    color: var(--text-normal) !important;
+    user-select: auto !important;
+    cursor: auto !important;
+  }
+  
+  .secret::before, .secret::after {
+    display: block;
+    position: absolute;
+    font-weight: 500;
+    color: var(--text-accent);
+    text-align: center;
+    text-shadow: none;
+    transition: all .3s;
+    content: 'CLICK TO UNLOCK';
+    opacity: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    top: 50%;
+  }
+  
+  .secret:hover:before {
+    opacity: 1;
+  }
+  
+  .secret:hover {
+    text-shadow: 0 0 14px var(--text-normal);
+  }
+  

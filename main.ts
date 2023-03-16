@@ -67,7 +67,6 @@ export default class SecretBlock extends Plugin {
 	async openModal() {
 		const modal = new PassModal(this.app, (result) => {
 			this.res = result;
-			new Notice(`Password entered: ${this.res}`);
 		});
 
 		modal.open();
@@ -111,3 +110,44 @@ class PassModal extends Modal {
 		contentEl.empty();
 	}
 }
+
+/*class PassModal extends Modal {
+	result: string;
+	onSubmit: (result: string) => void;
+
+	constructor(app: App, onSubmit: (result: string) => void) {
+		super(app);
+		this.onSubmit = onSubmit;
+	}
+
+	onOpen() {
+		const { contentEl } = this;
+
+		contentEl.createEl("h1", { text: "Enter your password to read that." });
+
+		const passwordInput = contentEl.createEl("input", {
+			attr: { type: "password" },
+			cls: "mod-input",
+		});
+		passwordInput.oninput = (evt) => {
+			this.result = (evt.target as HTMLInputElement).value;
+		};
+
+		new Setting(contentEl)
+			.addButton((btn) =>
+				btn
+					.setButtonText("Submit")
+					.setCta()
+					.onClick(() => {
+						this.close();
+						this.onSubmit(this.result);
+					})
+			);
+	}
+
+
+	onClose() {
+		let { contentEl } = this;
+		contentEl.empty();
+	}
+}*/

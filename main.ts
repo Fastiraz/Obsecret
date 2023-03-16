@@ -1,6 +1,9 @@
 import { Plugin, MarkdownRenderer, App, Modal, Setting, Notice, addIcon } from 'obsidian';
 
 export default class SecretBlock extends Plugin {
+	public res: string;
+	public password = "e5e9fa1ba31ecd1ae84f75caaa474f3a663f05f4";
+
 	async onload() {
 		// This 
 		this.registerMarkdownCodeBlockProcessor("secret-block", (source, el, _) => {
@@ -13,13 +16,14 @@ export default class SecretBlock extends Plugin {
 
 			container.addEventListener("click", () => {
 				if (container.className === "secret") {
-					/* DISPLAY THE MODAL HERE */
-					//container.className = "secret-show";
-					new PassModal(this.app, (result) => {
+					callback: () => this.openModal();
+					if (this.res === this.password) {
 						container.className = "secret-show";
-						new Notice(`Password: ${result}`);
-						new Notice('The content is no longer hidden.');
-					}).open();
+						new Notice("The content is no longer hidden.");
+					} else {
+						container.className = "secret";
+						new Notice('Invalid password!');
+					}
 				}
 			});
 
@@ -29,8 +33,17 @@ export default class SecretBlock extends Plugin {
 					new Notice('The content has been hidden.');
 				}
 			});
-			
+
 		});
+	}
+
+	async openModal() {
+		const modal = new PassModal(this.app, (result) => {
+			this.res = result;
+			new Notice(`Password entered: ${this.res}`);
+		});
+
+		modal.open();
 	}
 }
 

@@ -2,7 +2,7 @@ import { Plugin, MarkdownRenderer, App, Modal, Setting, Notice, addIcon } from '
 
 export default class SecretBlock extends Plugin {
 	public res: string;
-	public password = "e5e9fa1ba31ecd1ae84f75caaa474f3a663f05f4";
+	public password = "arrow";
 
 	async onload() {
 		// This 
@@ -14,18 +14,45 @@ export default class SecretBlock extends Plugin {
 			for (let row of rows)
 				container.createEl("div", { text: row });
 
-			container.addEventListener("click", () => {
+			/*container.addEventListener("click", async () => {
 				if (container.className === "secret") {
-					callback: () => this.openModal();
+					await this.openModal(); // Wait for modal to be closed
 					if (this.res === this.password) {
 						container.className = "secret-show";
 						new Notice("The content is no longer hidden.");
+						this.res = "";
 					} else {
 						container.className = "secret";
 						new Notice('Invalid password!');
 					}
 				}
+			});*/
+
+			container.addEventListener("click", async () => {
+				if (container.className === "secret") {
+					await new Promise<void>((resolve) => {
+						const modal = new PassModal(this.app, (result) => {
+							new Notice(`Password entered: ${result}`);
+							this.res = result;
+							modal.close();
+							resolve(); // Resolve the promise when the modal is closed
+						});
+
+						modal.open();
+					});
+
+					if (this.res === this.password) {
+						container.className = "secret-show";
+						new Notice("The content is no longer hidden.");
+						this.res = "";
+					} else {
+						container.className = "secret";
+						new Notice("Invalid password!");
+					}
+				}
 			});
+
+
 
 			container.addEventListener("dblclick", () => {
 				if (container.className === "secret-show") {

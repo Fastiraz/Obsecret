@@ -2,11 +2,11 @@ import { Plugin, MarkdownRenderer, App, Modal, Setting, Notice, addIcon } from '
 
 export default class SecretBlock extends Plugin {
 	public res: string;
-	public password = "arrow";
+	public password = "CHANGE_IT";
 
 	async onload() {
 		// This 
-		this.registerMarkdownCodeBlockProcessor("secret-block", (source, el, _) => {
+		this.registerMarkdownCodeBlockProcessor("lock", (source, el, _) => {
 			const container = el.createEl("div");
 			container.className = "secret";
 
